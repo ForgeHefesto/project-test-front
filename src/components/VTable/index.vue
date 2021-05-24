@@ -27,17 +27,17 @@ export default {
   },
 
   mounted() {
-    console.log();
+    console.log(this.bodytable);
   },
 
   methods: {
-    editItem(item) {
-      this.$emit("update",{
-          "indexOf":this.bodytable.indexOf(item),
-          "date": Object.assign({}, item),
-          "dialog": true
-      })  
+     editItem(item) {
+      this.$emit("update",item._id)  
     },
+
+    deleteItem(item){
+      this.$emit("delete",item)  
+    }
   },
 };
 </script>
