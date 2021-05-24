@@ -29,7 +29,7 @@
         <div class="d-flex">
           <v-row>
             <v-col cols="9">
-              <h2>Lista de Ativos</h2>
+              <h2>Lista de usuários</h2>
             </v-col>
             <v-col cols="3">
               <v-btn
