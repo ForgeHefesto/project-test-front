@@ -84,7 +84,7 @@ export default {
     ],
     emailRules: [
       (v) => !!v || "E-mail é requirido",
-      (v) => /.+@.+\..+/.test(v) || "Seu e-mail é invalido exmaple@xemaple.com",
+      (v) => /.+@.+\..+/.test(v) || "Seu e-mail é invalido example@example.com",
     ],
     cpfRules: [
       (v) => !!v || "CPF é requirido",
