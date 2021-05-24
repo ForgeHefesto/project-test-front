@@ -53,14 +53,17 @@
                 ></v-text-field>
               </v-col>
               <v-divider></v-divider>
-              <v-btn
-                :disabled="!valid"
-                color="blue darken-4"
-                class="mr-4"
-                @click="save(date)"
-              >
-                Confirmar
-              </v-btn>
+              <v-col cols="12" sm="12" md="12">
+                <v-btn
+                  :disabled="!valid || loading"
+                  depressed
+                  color="primary"
+                  class="float-right"
+                  @click="save(date)"
+                >
+                  Confirmar
+                </v-btn>
+              </v-col>
             </v-row>
           </v-form>
         </v-card-text>
@@ -113,22 +116,27 @@ export default {
       this.$emit("close");
     },
     save(resp) {
+      this.loading = true;
       if (this.editModel == true) {
-        console.log("teste")
         this.axios
-          .put(`https://project-test-back.herokuapp.com/users/${resp._id}`, resp)
+          .put(`https://project-test-back.herokuapp.com/users/` + resp.id, resp)
           .then(() => {
+            this.loading = false;
             this.$emit("save");
-          }).catch((err) => {
+          })
+          .catch((err) => {
+            this.loading = false;
             console.log(err);
           });
       } else {
         this.axios
           .post("https://project-test-back.herokuapp.com/users", resp)
           .then(() => {
+            this.loading = false;
             this.$emit("save");
           })
           .catch((err) => {
+            this.loading = false;
             console.log(err);
           });
       }

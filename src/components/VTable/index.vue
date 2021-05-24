@@ -25,11 +25,6 @@ export default {
       require: true,
     },
   },
-
-  mounted() {
-    console.log(this.bodytable);
-  },
-
   methods: {
      editItem(item) {
       this.$emit("update",item._id)  

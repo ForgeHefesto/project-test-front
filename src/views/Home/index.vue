@@ -16,6 +16,11 @@
         </div>
       </v-dialog>
       <VToolbar @update-Status="UpdateStatus" />
+      <v-progress-linear
+        v-if="loading"
+        indeterminate
+        color="blue darken-2"
+      ></v-progress-linear>
       <v-container>
         <div class="d-flex">
           <v-row>
@@ -87,6 +92,7 @@ export default {
   }),
 
   mounted() {
+    this.loading = true
     this.init();
   },
 
@@ -95,6 +101,7 @@ export default {
       const raw = await this.axios.get(
         "https://project-test-back.herokuapp.com/users"
       );
+      this.loading = false
       this.bodyTable = raw.data;
     },
 
@@ -108,7 +115,7 @@ export default {
         "https://project-test-back.herokuapp.com/users/" + id
       );
       this.editedItem = date.data;
-      this.title = "Ediçao de Usuario";
+      this.title = "Ediçao de Usuário";
       this.editModel = true;
       this.dialog = true;
       this.ModelType = true;
@@ -129,7 +136,7 @@ export default {
         cpf: 0,
         phone: 0,
       }),
-        (this.title = "Novo Usuario");
+        (this.title = "Novo Usuário");
       this.editModel = false;
     },
 
