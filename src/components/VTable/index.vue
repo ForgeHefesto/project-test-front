@@ -6,7 +6,7 @@
     class="elevation-1"
   >
     <template v-slot:item.actions="{ item }">
-      <v-icon color="green" small class="mr-2" @click="editItem(item)">
+      <v-icon color="primary" small class="mr-2" @click="editItem(item)">
         mdi-pencil
       </v-icon>
       <v-icon color="red" small @click="deleteItem(item)"> mdi-delete </v-icon>

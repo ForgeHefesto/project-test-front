@@ -31,11 +31,11 @@ export default {
           `https://project-test-back.herokuapp.com/users/${this.date._id}`
         )
         .then(() => {
-          this.$emit("close");
+          this.$emit("close","Usuário excluido com sucesso");
         });
     },
     Return() {
-      this.$emit("close");
+      this.$emit("return");
     },
   },
 };

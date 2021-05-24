@@ -12,10 +12,14 @@
           />
         </div>
         <div v-else>
-          <VModalDell :date="dellUser" @close="close" />
+          <VModalDell
+            :date="dellUser"
+            @close="close"
+            @return="() => (dialog = false)"
+          />
         </div>
       </v-dialog>
-      <VToolbar @update-Status="UpdateStatus" />
+      <VToolbar  />
       <v-progress-linear
         v-if="loading"
         indeterminate
@@ -46,6 +50,7 @@
           @delete="dialogDellModel"
         />
       </v-container>
+      <VSnackBar :snackbar="alertModel" :text="alertText" :colorAlert="typeAlert" />
     </v-main>
   </v-app>
 </template>
@@ -55,6 +60,8 @@ import VToolbar from "../../components/VToolbar/index";
 import VTable from "../../components/VTable/index";
 import VModal from "../../components/VModal/index";
 import VModalDell from "../../components/VModalDell/index";
+import VSnackBar from "../../components/VSnackBar/index";
+
 
 export default {
   name: "home",
@@ -64,9 +71,9 @@ export default {
     VTable,
     VModal,
     VModalDell,
+    VSnackBar
   },
   data: () => ({
-    typeUser: null,
     loading: false,
     headers: [
       {
@@ -88,11 +95,14 @@ export default {
     dialog: false,
     editModel: false,
     ModelType: false,
+    alertModel: false,
+    alertText: "",
+    typeAlert: "",
     title: "",
   }),
 
   mounted() {
-    this.loading = true
+    this.loading = true;
     this.init();
   },
 
@@ -101,12 +111,11 @@ export default {
       const raw = await this.axios.get(
         "https://project-test-back.herokuapp.com/users"
       );
-      this.loading = false
+      this.loading = false;
       this.bodyTable = raw.data;
     },
 
     UpdateStatus(res) {
-      this.loading = true;
       this.typeUser = res;
     },
 
@@ -133,19 +142,34 @@ export default {
       (this.editedItem = {
         name: "",
         email: "",
-        cpf: '',
-        phone: '',
+        cpf: "",
+        phone: "",
       }),
         (this.title = "Novo Usuário");
       this.editModel = false;
     },
 
-    close() {
+    close(text) {
+      if (text) {
+        this.alertModel = true;
+        this.alertText = text;
+        this.typeAlert = "warning";
+        this.defaultAlert();
+      }
       this.dialog = false;
       this.init();
     },
 
-    save() {
+    defaultAlert() {
+      setTimeout(() => {
+        this.alertModel = false;
+      }, 9000);
+    },
+
+    save(text) {
+      this.alertModel = true;
+      this.alertText = text;
+      this.typeAlert = "success";
       this.dialog = false;
       this.init();
     },

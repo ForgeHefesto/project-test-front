@@ -122,7 +122,7 @@ export default {
           .put(`https://project-test-back.herokuapp.com/users/` + resp._id, resp)
           .then(() => {
             this.loading = false;
-            this.$emit("save");
+            this.$emit("save","Usuário editado com sucesso");
           })
           .catch((err) => {
             this.loading = false;
@@ -133,7 +133,7 @@ export default {
           .post("https://project-test-back.herokuapp.com/users", resp)
           .then(() => {
             this.loading = false;
-            this.$emit("save");
+            this.$emit("save","Usuário criado com sucesso");
           })
           .catch((err) => {
             this.loading = false;
