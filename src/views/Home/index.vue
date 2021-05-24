@@ -133,8 +133,8 @@ export default {
       (this.editedItem = {
         name: "",
         email: "",
-        cpf: 0,
-        phone: 0,
+        cpf: '',
+        phone: '',
       }),
         (this.title = "Novo Usuário");
       this.editModel = false;

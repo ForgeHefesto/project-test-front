@@ -84,16 +84,16 @@ export default {
     ],
     emailRules: [
       (v) => !!v || "E-mail é requirido",
-      (v) => /.+@.+\..+/.test(v) || "Seu e-mail é invalido",
+      (v) => /.+@.+\..+/.test(v) || "Seu e-mail é invalido exmaple@xemaple.com",
     ],
     cpfRules: [
       (v) => !!v || "CPF é requirido",
-      (v) => (v && v.length <= 11) || "Seu CPF não pode ter mais que 11 letras",
+      (v) => (v && v.length <= 11) || "Seu CPF não pode ter mais que 11 numeros",
     ],
     phoneRules: [
       (v) => !!v || "Telefone é requirido",
       (v) =>
-        (v && v.length <= 11) || "Seu telefone não pode ter mais que 11 letras",
+        (v && v.length <= 11) || "Seu telefone não pode ter mais que 11 numeros",
     ],
   }),
 
@@ -119,7 +119,7 @@ export default {
       this.loading = true;
       if (this.editModel == true) {
         this.axios
-          .put(`https://project-test-back.herokuapp.com/users/` + resp.id, resp)
+          .put(`https://project-test-back.herokuapp.com/users/` + resp._id, resp)
           .then(() => {
             this.loading = false;
             this.$emit("save");
